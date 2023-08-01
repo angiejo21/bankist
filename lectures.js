@@ -164,17 +164,24 @@ Test data:
 § Data 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK �
 
-function calcAverageHumanAge(arr) {
-  const humanAge = arr.map(dog => (dog <= 2 ? dog * 2 : 16 + dog * 4));
-  const adultAge = humanAge.filter(adult => adult > 18);
-  const average = adultAge.reduce((acc, age) => acc + age) / adultAge.length;
-  // const average = adultAge.reduce((acc, age, i, arr) => acc + age / arr.length);
-  return average;
-}
+
+// function calcAverageHumanAge(arr) {
+//   const humanAge = arr.map(dog => (dog <= 2 ? dog * 2 : 16 + dog * 4));
+//   const adultAge = humanAge.filter(adult => adult > 18);
+//   const average = adultAge.reduce((acc, age) => acc + age) / adultAge.length;
+//   // const average = adultAge.reduce((acc, age, i, arr) => acc + age / arr.length);
+//   return average;
+// }
+const calcAverageHumanAge = dogAges =>
+  dogAges
+    .map(dog => (dog <= 2 ? dog * 2 : 16 + dog * 4))
+    .filter(adult => adult > 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
 
 console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
-*/
+
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const eurToUsd = 1.1;
 
@@ -183,3 +190,19 @@ const totalDepositsUSD = movements
   .map(mov => mov * eurToUsd)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositsUSD);
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+
+let newAccount;
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') {
+    newAccount = acc;
+  }
+}
+
+console.log(account);
+console.log(newAccount);
+*/
