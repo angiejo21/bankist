@@ -100,8 +100,6 @@ function checkDogs(jDogs, kDogs) {
 
 checkDogs(dogsJulia, dogsKate);
 checkDogs(dogsJulia2, dogsKate2);
-  */
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const eurToUsd = 1.1;
 
@@ -117,6 +115,71 @@ const movementsDescriptions = movements.map(
   (mov, i) =>
     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
       mov
-    )}`
-);
+      )}`
+  );
 console.log(movementsDescriptions);
+
+const deposits = movements.filter(mov => mov > 0);
+const withdrawls = movements.filter(mov => mov < 0);
+console.log(deposits);
+console.log(withdrawls);
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+console.log(movements);
+
+// accumulator -> sum
+// const balance = movements.reduce((acc, cValue) => {
+//   console.log(acc, cValue);
+//   return acc + cValue;
+// }, 0);
+const balance = movements.reduce((acc, cValue) => acc + cValue, 0);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+
+console.log(balance);
+console.log(balance2);
+
+//Maximum value
+
+const max = movements.reduce(
+  (acc, cValue) => (acc > cValue ? acc : cValue),
+  movements[0]
+);
+console.log(max);
+*/
+/*
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+Your tasks:
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages �)
+4. Run the function for both test datasets
+Test data:
+§ Data 1: [5, 2, 4, 1, 15, 8, 3]
+§ Data 2: [16, 6, 10, 5, 6, 1, 4]
+GOOD LUCK �
+
+function calcAverageHumanAge(arr) {
+  const humanAge = arr.map(dog => (dog <= 2 ? dog * 2 : 16 + dog * 4));
+  const adultAge = humanAge.filter(adult => adult > 18);
+  const average = adultAge.reduce((acc, age) => acc + age) / adultAge.length;
+  // const average = adultAge.reduce((acc, age, i, arr) => acc + age / arr.length);
+  return average;
+}
+
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+*/
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
