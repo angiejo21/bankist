@@ -76,5 +76,17 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html); //con beforeend andrebbero in ordine crescente
   });
 };
-
 displayMovements(account1.movements);
+
+function createUsernames(accs) {
+  accs.forEach(
+    acc =>
+      (acc.username = acc.owner
+        .toLowerCase()
+        .split(' ')
+        .map(name => name[0])
+        .join(''))
+  );
+}
+createUsernames(accounts);
+console.log(accounts);
